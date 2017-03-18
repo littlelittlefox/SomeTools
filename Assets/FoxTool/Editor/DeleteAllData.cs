@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace FoxTool
 {
-	public class DeleteAllData : MonoBehaviour
+	public class DeleteAllData
 	{
 		public const string MenuItemName = "FoxTool/DeleteAllData";
 
