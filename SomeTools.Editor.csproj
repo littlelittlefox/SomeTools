@@ -117,6 +117,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\FoxTool\Editor\DeleteAllData.cs" />
     <Compile Include="Assets\FoxTool\Editor\ToggleFastActive.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
