@@ -14,7 +14,7 @@ namespace FoxTool
 		public const string MenuItemName = "FoxTool/FastToggleActive";
 
 		[InitializeOnLoadMethod]
-		public static void Init()
+		public static void Init() 
 		{
 			Register();
 		}
@@ -30,8 +30,16 @@ namespace FoxTool
 		public static void FastToggleActive()
 		{
 			IsShow = !IsShow;
-
+			Menu.SetChecked(MenuItemName, IsShow);
 			Register();
+		}
+
+		[MenuItem(MenuItemName, true)]
+		public static bool FastToggleActiveCheck()
+		{
+			Menu.SetChecked(MenuItemName, IsShow);
+
+			return true;
 		}
 
 		public static void Register()
@@ -45,8 +53,6 @@ namespace FoxTool
 				// ReSharper disable once DelegateSubtraction
 				EditorApplication.hierarchyWindowItemOnGUI -= HierarchyWindowItemOnGui;
 			}
-
-			Menu.SetChecked(MenuItemName, IsShow);
 		}
 
 
