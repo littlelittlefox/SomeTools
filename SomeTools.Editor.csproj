@@ -123,6 +123,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\FoxTool\Editor\CreateAtlas.cs" />
     <Compile Include="Assets\FoxTool\Editor\DeleteAllData.cs" />
     <Compile Include="Assets\FoxTool\Editor\ToggleFastActive.cs" />
   </ItemGroup>
