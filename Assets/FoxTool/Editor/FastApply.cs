@@ -5,7 +5,7 @@
 using UnityEditor;
 using UnityEngine;
 
-public class FastApply : MonoBehaviour {
+public class FastApply {
 	public const string MenuItemName = "FoxTool/FastApply";
 
 	[InitializeOnLoadMethod]
