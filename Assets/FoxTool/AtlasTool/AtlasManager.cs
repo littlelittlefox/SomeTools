@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace FoxTool
 {
-	public class AtlasManager : MonoBehaviour
+	public class AtlasManager
 	{
 		public const string AtlasPath = "Atlas/";
 
@@ -17,14 +17,7 @@ namespace FoxTool
 			UIAtlas atlas = Resources.Load<UIAtlas>(AtlasPath + atlasName);
 			if (atlas != null)
 			{
-				if (atlas.SpriteDirectory == null)
-				{
-					foreach (var s in atlas.Sprites)
-					{
-						atlas[s.name] = s;
-					}
-				}
-				if (atlas.SpriteDirectory != null && atlas.SpriteDirectory.ContainsKey(spriteName))
+				if (atlas.SpriteDirectory.ContainsKey(spriteName))
 				{
 					sprite = atlas[spriteName];
 				}

@@ -18,8 +18,12 @@ namespace FoxTool {
 
 		private Dictionary<string, Sprite> _spriteDirectory;
 
-		public Dictionary<string, Sprite> SpriteDirectory {
-			get {
+		public Dictionary<string, Sprite> SpriteDirectory
+		{
+			get
+			{
+				if (_spriteDirectory == null)
+					LoadSprites();
 				return _spriteDirectory;
 			}
 		}
@@ -28,11 +32,14 @@ namespace FoxTool {
 			get {
 				return _spriteDirectory[spriteName];
 			}
-			set
+		}
+
+		private void LoadSprites()
+		{
+			_spriteDirectory = new Dictionary<string, Sprite>();
+			foreach (var sprite in Sprites)
 			{
-				if (_spriteDirectory == null)
-					_spriteDirectory = new Dictionary<string, Sprite>();
-				_spriteDirectory[spriteName] = value;
+				_spriteDirectory[sprite.name] = sprite;
 			}
 		}
 
