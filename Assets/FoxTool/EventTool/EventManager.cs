@@ -17,14 +17,33 @@ namespace FoxTool {
 				Debug.LogError("不能添加空事件");
 				return;
 			}
-			EventFuncs.Add(e, func);
+			if (EventFuncs.ContainsKey(e))
+			{
+				EventFuncs[e] += func;
+			}
+			else
+			{
+				EventFuncs.Add(e, func);
+			}
 		}
 
 		public static void SendEvent(EventEnum e, object sender = null, EventArgs arg = null)
 		{
 			if (EventFuncs.ContainsKey(e))
 			{
-				EventFuncs[e](sender, arg);
+				foreach (var @delegate in EventFuncs[e].GetInvocationList())
+				{
+					var handler = (EventHandler) @delegate;
+					handler.BeginInvoke(sender, arg, new AsyncCallback((a) =>
+					{
+						try {
+							handler.EndInvoke(a);
+						} catch (Exception ex) {
+							Debug.LogError(ex);
+							throw new Exception(ex.Message);
+						}
+					}), null);
+				}
 			}
 			else
 			{
@@ -32,13 +51,14 @@ namespace FoxTool {
 			}
 		}
 
-		public static void RemoveEventListener(EventEnum e)
+		public static void RemoveEventListener(EventEnum e, EventHandler func)
 		{
 			if (EventFuncs.ContainsKey(e))
 			{
 				// ReSharper disable once DelegateSubtraction
-				EventFuncs[e] -= EventFuncs[e];
-				EventFuncs.Remove(e);
+				EventFuncs[e] -= func;
+				if (EventFuncs[e] == null)
+					EventFuncs.Remove(e);
 			}
 			else
 			{
